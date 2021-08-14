@@ -5,15 +5,15 @@ import { useToasts } from 'react-toast-notifications';
 import { VisitorContext } from '../contexts/visitor-context';
 import environment from '../config';
 
-export const MakingCall = () => {
+export const TestPage = () => {
   const { curCall, cur, addVisitor } = useContext(VisitorContext);
   const { addToast } = useToasts();
   const [optKey, setOptKey] = useState({ count: 0, num: '', fn: {} as any });
   const socket = new JsSIP.WebSocketInterface('wss://sbc03.tel4vn.com:7444');
   const configuration = {
     sockets: [socket],
-    uri: '108@2-test1.gcalls.vn:50061',
-    password: 'test1108',
+    uri: '109@2-test1.gcalls.vn:50061',
+    password: 'test1109',
     session_timers: false,
     register: true,
   };
@@ -41,7 +41,7 @@ export const MakingCall = () => {
         console.log('end');
         audio?.remove();
         addVisitor({
-          from: environment.user1,
+          from: environment.user2,
           name: data.session.remote_identity.display_name || '',
           phoneNumber:
             data.session.remote_identity.uri.user + '@' + data.session.remote_identity.uri.host,
@@ -63,7 +63,7 @@ export const MakingCall = () => {
         console.log('failed');
         audio?.remove();
         addVisitor({
-          from: environment.user1,
+          from: environment.user2,
           name: data.session.remote_identity.display_name || '',
           phoneNumber:
             data.session.remote_identity.uri.user + '@' + data.session.remote_identity.uri.host,
@@ -157,7 +157,7 @@ export const MakingCall = () => {
                 }
               }
               addVisitor({
-                from: environment.user1,
+                from: environment.user2,
                 name: cur.name || '',
                 phoneNumber: formik.values.phoneNumber,
                 duration: 0,
@@ -179,7 +179,7 @@ export const MakingCall = () => {
               console.log(e);
               console.log(cur);
               addVisitor({
-                from: environment.user1,
+                from: environment.user2,
                 name: cur.name || '',
                 phoneNumber: formik.values.phoneNumber,
                 duration: session.end_time.getTime() - session.start_time.getTime(),
